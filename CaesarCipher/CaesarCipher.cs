@@ -23,7 +23,7 @@ namespace CaesarCipher
 						Ciphertext += (char)(text[i] + shiftKey);
 					}
 				}
-				else if (((int)text[i] >= 65 && (int)text[i] <= 90))
+				else if (((int)text[i] >=(int)'A' && (int)text[i] <= (int)'Z'))
 				{
 					int sum = (int)text[i] + shiftKey;
 					if (sum >= 91)
