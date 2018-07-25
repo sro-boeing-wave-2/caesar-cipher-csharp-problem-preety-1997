@@ -1,46 +1,30 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace CaesarCipher
 {
-    public static class RotationalCipher
-    {
+	public static class RotationalCipher
+	{
 		public static string Rotate(string text, int shiftKey)
 		{
-			string Ciphertext = "";
-			for (int i = 0; i < text.Length; i++)
+			StringBuilder output = new StringBuilder();
+
+			foreach (char replace in text)
+				output.Append(rotate(replace, shiftKey));
+
+			return output.ToString();
+		}
+		public static char rotate(char replace, int shiftKey)
+		{
+			if (!char.IsLetter(replace))
 			{
-				if (((int)text[i] >=(int)'a' && (int)text[i] <= (int)'z'))
-				{
-					int sum = (int)text[i] + shiftKey;
-					if (sum >= 123)
-					{
-						Ciphertext += (char)('a'+(sum-123));
-					}
-					
-					else     
-					{
-						Ciphertext += (char)(text[i] + shiftKey);
-					}
-				}
-				else if (((int)text[i] >=(int)'A' && (int)text[i] <= (int)'Z'))
-				{
-					int sum = (int)text[i] + shiftKey;
-					if (sum >= 91)
-					{
-						Ciphertext += (char)('A' +(sum -91));
-					}
-					
-					else
-					{
-						Ciphertext += (char)(text[i] + shiftKey);
-					}
-				}
-				else {
-					Ciphertext += text[i];
-				}
+
+				return replace;
 			}
-			return Ciphertext;
+			char upperOrlower = char.IsUpper(replace) ? 'A' : 'a';
+			return (char)((((replace + shiftKey) - upperOrlower) % 26) + upperOrlower);
+
 
 		}
 	}
